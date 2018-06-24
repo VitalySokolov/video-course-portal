@@ -1,5 +1,9 @@
 <div>
   <app-search-course></app-search-course>
-  <app-course-item *ngFor="let course of courseList" [videoCourse]="course"></app-course-item>
-  <button class="btn btn-info btn-block mt-3">Load More</button>
+  <app-course-item
+    *ngFor="let course of courseList"
+    [videoCourse]="course"
+    (courseDeleted)="onCourseDeleted($event)">
+  </app-course-item>
+  <button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">Load More</button>
 </div>
