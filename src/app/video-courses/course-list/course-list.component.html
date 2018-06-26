@@ -1,9 +1,7 @@
-<div>
-  <app-search-course></app-search-course>
-  <app-course-item
-    *ngFor="let course of courseList"
-    [videoCourse]="course"
-    (courseDeleted)="onCourseDeleted($event)">
-  </app-course-item>
-  <button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">Load More</button>
-</div>
+<app-search-course></app-search-course>
+<app-course-item
+  *ngFor="let course of courseList"
+  [videoCourse]="course"
+  (courseDeleted)="onCourseDeleted(course.id)">
+</app-course-item>
+<button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">Load More</button>
