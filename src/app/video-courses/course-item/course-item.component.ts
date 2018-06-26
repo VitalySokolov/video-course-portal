@@ -15,8 +15,4 @@ export class CourseItemComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  onCourseDeleted() {
-    this.courseDeleted.emit(this.videoCourse.id);
-  }
 }
