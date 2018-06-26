@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { VideoCourseItem } from '../video-course-item.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {VideoCourseItem} from '../video-course-item.model';
 
 @Component({
   selector: 'app-course-item',
@@ -8,6 +8,7 @@ import { VideoCourseItem } from '../video-course-item.model';
 })
 export class CourseItemComponent implements OnInit {
   @Input() videoCourse: VideoCourseItem;
+  @Output() courseDeleted = new EventEmitter<number>();
 
   constructor() {
   }

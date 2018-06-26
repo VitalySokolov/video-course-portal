@@ -1,9 +1,9 @@
 <div class="row mb-3">
   <div class="col-7">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Name, fragment or date">
+      <input type="text" class="form-control" placeholder="Name, fragment or date" [(ngModel)]="search">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Search</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onSearchClick()">Search</button>
       </div>
     </div>
   </div>
