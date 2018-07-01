@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {VideoCourseItem} from '../video-course-item.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { VideoCourseItem } from '../video-course-item.model';
 
 @Component({
   selector: 'app-course-item',

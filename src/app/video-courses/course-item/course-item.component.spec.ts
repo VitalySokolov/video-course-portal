@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TruncateModule } from 'ng2-truncate';
 import { CourseItemComponent } from './course-item.component';
 
 describe('CourseItemComponent', () => {
@@ -8,6 +9,7 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [TruncateModule],
       declarations: [ CourseItemComponent ]
     })
     .compileComponents();
