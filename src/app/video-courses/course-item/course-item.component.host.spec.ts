@@ -8,7 +8,11 @@ import { TruncateModule } from 'ng2-truncate';
 @Component({
   template: `
     <app-course-item
-      [videoCourse]="course"
+      [courseId]="course.id"
+      [courseTitle]="course.title"
+      [courseDescription]="course.description"
+      [courseDate]="course.date"
+      [courseDuration]="course.duration"
       (courseDeleted)="onCourseDeleted(course.id)">
     </app-course-item>`
 })

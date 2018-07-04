@@ -34,9 +34,16 @@ describe('CourseItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
-    title = fixture.debugElement.query(By.css('h3'));
-    description = fixture.debugElement.query(By.css('p'));
-    deleteButton = fixture.debugElement.query(By.css('.btn-danger'));
+    title = fixture.debugElement.query(By.css('.course-title'));
+    description = fixture.debugElement.query(By.css('.course-description'));
+    deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+
+    component.courseId = videoCourseItem.id;
+    component.courseTitle = videoCourseItem.title;
+    component.courseDescription = videoCourseItem.description;
+    component.courseDate  = videoCourseItem.date;
+    component.courseDuration = videoCourseItem.duration;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -44,17 +51,13 @@ describe('CourseItemComponent', () => {
   });
 
   it('should display course information', () => {
-    component.videoCourse = videoCourseItem;
-
-    fixture.detectChanges();
     expect(title.nativeElement.innerText).toBe(courseTitle);
     expect(description.nativeElement.innerText).toBe(courseDescription);
   });
 
   it('should emit correct course id when click "Delete" button', () => {
     let deletedCourseId: number;
-    component.videoCourse = videoCourseItem;
-    fixture.detectChanges();
+
     component.courseDeleted.subscribe((id: number) => {
       deletedCourseId = id;
       console.log('Delete button clicked');

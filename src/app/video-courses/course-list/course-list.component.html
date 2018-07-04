@@ -1,7 +1,11 @@
 <app-search-course></app-search-course>
 <app-course-item
   *ngFor="let course of courseList"
-  [videoCourse]="course"
+  [courseId]="course.id"
+  [courseTitle]="course.title"
+  [courseDescription]="course.description"
+  [courseDate]="course.date"
+  [courseDuration]="course.duration"
   (courseDeleted)="onCourseDeleted(course.id)">
 </app-course-item>
 <button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">Load More</button>
