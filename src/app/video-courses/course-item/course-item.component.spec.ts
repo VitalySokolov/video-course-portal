@@ -4,6 +4,7 @@ import { TruncateModule } from 'ng2-truncate';
 import { CourseItemComponent } from './course-item.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { CourseDurationPipe } from '../course-duration.pipe';
 
 describe('CourseItemComponent', () => {
   const courseId = 123;
@@ -13,7 +14,7 @@ describe('CourseItemComponent', () => {
     id: courseId,
     title: courseTitle,
     description: courseDescription,
-    date: new Date(),
+    date: (new Date()).valueOf() - 500000000,
     duration: 123
   };
 
@@ -26,7 +27,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TruncateModule],
-      declarations: [CourseItemComponent]
+      declarations: [CourseItemComponent, CourseDurationPipe]
     })
       .compileComponents();
   }));
@@ -41,7 +42,7 @@ describe('CourseItemComponent', () => {
     component.courseId = videoCourseItem.id;
     component.courseTitle = videoCourseItem.title;
     component.courseDescription = videoCourseItem.description;
-    component.courseDate  = videoCourseItem.date;
+    component.courseDateMillis  = videoCourseItem.date;
     component.courseDuration = videoCourseItem.duration;
     fixture.detectChanges();
   });
@@ -51,12 +52,19 @@ describe('CourseItemComponent', () => {
   });
 
   it('should display course information', () => {
-    expect(title.nativeElement.innerText).toBe(courseTitle);
+    debugger;
+    expect(title.nativeElement.innerText).toBe(courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(courseDescription);
   });
 
   it('should emit correct course id when click "Delete" button', () => {
     let deletedCourseId: number;
+    let date = new Date();
+    console.log(date.valueOf());
+    console.log(date.toDateString());
+    date = new Date(date.valueOf() - 500000000);
+    console.log(date.valueOf());
+    console.log(date.toDateString());
 
     component.courseDeleted.subscribe((id: number) => {
       deletedCourseId = id;

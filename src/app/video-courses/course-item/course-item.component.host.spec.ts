@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseItemComponent } from './course-item.component';
 import { By } from '@angular/platform-browser';
 import { TruncateModule } from 'ng2-truncate';
+import { CourseDurationPipe } from '../course-duration.pipe';
 
 @Component({
   template: `
@@ -11,7 +12,7 @@ import { TruncateModule } from 'ng2-truncate';
       [courseId]="course.id"
       [courseTitle]="course.title"
       [courseDescription]="course.description"
-      [courseDate]="course.date"
+      [courseDateMillis]="course.date"
       [courseDuration]="course.duration"
       (courseDeleted)="onCourseDeleted(course.id)">
     </app-course-item>`
@@ -24,7 +25,7 @@ class TestHostComponent {
     id: this.courseId,
     title: this.courseTitle,
     description: this.courseDescription,
-    date: new Date(),
+    date: (new Date()).valueOf() - 100000000,
     duration: 123
   };
   deletedId: number;
@@ -34,13 +35,13 @@ class TestHostComponent {
   }
 }
 
-describe('CourseItemComponent with Test Host', () => {
+describe('CourseItemComponent with TestHost', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, TestHostComponent],
+      declarations: [CourseItemComponent, TestHostComponent, CourseDurationPipe],
       imports: [TruncateModule],
     });
   });
@@ -55,7 +56,7 @@ describe('CourseItemComponent with Test Host', () => {
     const title = fixture.debugElement.query(By.css('h3'));
     const description = fixture.debugElement.query(By.css('p'));
 
-    expect(title.nativeElement.innerText).toBe(testHost.courseTitle);
+    expect(title.nativeElement.innerText).toBe(testHost.courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(testHost.courseDescription);
   });
 

@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-10">
       <div class="row">
-        <div class="col-8"><h3 class="course-title">{{courseTitle}}</h3></div>
-        <div class="col-2">{{courseDuration}} min</div>
+        <div class="col-8"><h3 class="course-title">{{courseTitle | uppercase}}</h3></div>
+        <div class="col-2">{{courseDuration | courseDuration}}</div>
         <div class="col-2">{{courseDate | date:'mediumDate'}}</div>
       </div>
       <div class="row">
@@ -17,7 +17,8 @@
         <button class="btn btn-success" type="button">Edit</button>
       </div>
       <div class="row mb-3">
-        <button class="btn btn-danger delete-button" type="button" (click)="courseDeleted.emit(courseId)">Delete</button>
+        <button class="btn btn-danger delete-button" type="button" (click)="courseDeleted.emit(courseId)">Delete
+        </button>
       </div>
     </div>
   </div>
