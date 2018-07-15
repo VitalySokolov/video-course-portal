@@ -13,7 +13,7 @@ export class VideoCourseService {
     return [
       {
         id: 1,
-        title: 'Video Course 1',
+        title: 'Angular Course',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
         ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
         ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
@@ -27,7 +27,7 @@ export class VideoCourseService {
       },
       {
         id: 2,
-        title: 'Video Course 2',
+        title: 'React.js for beginners',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
         ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
         ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
@@ -41,7 +41,7 @@ export class VideoCourseService {
       },
       {
         id: 3,
-        title: 'Video Course 3',
+        title: 'Angular Advance Course',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
         ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
         ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
@@ -55,7 +55,7 @@ export class VideoCourseService {
       },
       {
         id: 4,
-        title: 'Video Course 4',
+        title: 'Angular, React and Vue.js',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
         ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
         ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
@@ -69,7 +69,7 @@ export class VideoCourseService {
       },
       {
         id: 5,
-        title: 'Video Course 5',
+        title: 'Mean stack',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
         ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
         ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +

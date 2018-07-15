@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {VideoCourseItem} from '../video-course-item.model';
-import {VideoCourseService} from '../video-course.service';
+import { Component, OnInit } from '@angular/core';
+import { VideoCourseItem } from '../video-course-item.model';
+import { VideoCourseService } from '../video-course.service';
 
 @Component({
   selector: 'app-course-list',
@@ -9,6 +9,7 @@ import {VideoCourseService} from '../video-course.service';
 })
 export class CourseListComponent implements OnInit {
   courseList: VideoCourseItem[] = [];
+  searchString: string;
 
   constructor(private videoCourseService: VideoCourseService) {
   }
@@ -23,5 +24,9 @@ export class CourseListComponent implements OnInit {
 
   loadMoreCourses() {
     console.log('LoadMore button pressed');
+  }
+
+  onSearchCourseClick(search: string) {
+    this.searchString = search;
   }
 }

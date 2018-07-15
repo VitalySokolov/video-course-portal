@@ -5,6 +5,7 @@ import { CourseItemComponent } from './course-item.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CourseDurationPipe } from '../course-duration.pipe';
+import { HighlightCourseDirective } from '../highlight-course.directive';
 
 describe('CourseItemComponent', () => {
   const courseId = 123;
@@ -27,7 +28,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TruncateModule],
-      declarations: [CourseItemComponent, CourseDurationPipe]
+      declarations: [CourseItemComponent, CourseDurationPipe, HighlightCourseDirective]
     })
       .compileComponents();
   }));
@@ -52,7 +53,6 @@ describe('CourseItemComponent', () => {
   });
 
   it('should display course information', () => {
-    debugger;
     expect(title.nativeElement.innerText).toBe(courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(courseDescription);
   });
