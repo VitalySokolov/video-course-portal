@@ -54,15 +54,15 @@ describe('CourseItemComponent with TestHost', () => {
   });
 
   it('should display course information', () => {
-    const title = fixture.debugElement.query(By.css('h3'));
-    const description = fixture.debugElement.query(By.css('p'));
+    const title = fixture.debugElement.query(By.css('.course-title'));
+    const description = fixture.debugElement.query(By.css('.course-description'));
 
     expect(title.nativeElement.innerText).toBe(testHost.courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(testHost.courseDescription);
   });
 
   it('should emit correct course id when click "Delete" button', () => {
-    const deleteButton = fixture.debugElement.query(By.css('.btn-danger'));
+    const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
     deleteButton.triggerEventHandler('click', null);
 
     expect(testHost.deletedId).toBe(testHost.courseId);
