@@ -22,7 +22,7 @@ export class VideoCourseService {
         ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
         ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
         ' ultricies gravida.',
-        date: (new Date()).valueOf() - 500000000,
+        date: new Date((new Date()).getTime() - 500000000),
         duration: 88
       },
       {
@@ -36,7 +36,7 @@ export class VideoCourseService {
         ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
         ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
         ' ultricies gravida.',
-        date: (new Date()).valueOf() + 500000000,
+        date: new Date((new Date()).getTime() + 500000000),
         duration: 27
       },
       {
@@ -50,7 +50,7 @@ export class VideoCourseService {
         ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
         ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
         ' ultricies gravida.',
-        date: (new Date()).valueOf(),
+        date: new Date((new Date()).getTime()),
         duration: 70
       },
       {
@@ -64,7 +64,7 @@ export class VideoCourseService {
         ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
         ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
         ' ultricies gravida.',
-        date: (new Date()).valueOf() - 5000000000,
+        date: new Date((new Date()).getTime() - 5000000000),
         duration: 46
       },
       {
@@ -78,7 +78,7 @@ export class VideoCourseService {
         ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
         ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
         ' ultricies gravida.',
-        date: (new Date()).valueOf() - 1000000000,
+        date: new Date((new Date()).getTime() - 1000000000),
         duration: 30
       },
     ];

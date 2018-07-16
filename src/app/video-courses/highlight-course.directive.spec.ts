@@ -11,9 +11,9 @@ import { By } from '@angular/platform-browser';
 })
 class TestHostComponent {
   millisInDay = 1000 * 60 * 60 * 24;
-  freshCourseDate = new Date((new Date()).valueOf() - this.millisInDay * 7);
-  futureCourseDate = new Date((new Date()).valueOf() + this.millisInDay);
-  oldCourseDate = new Date((new Date()).valueOf() - this.millisInDay * 21);
+  freshCourseDate = new Date((new Date()).getTime() - this.millisInDay * 7);
+  futureCourseDate = new Date((new Date()).getTime() + this.millisInDay);
+  oldCourseDate = new Date((new Date()).getTime() - this.millisInDay * 21);
 }
 
 describe('Component with HighlightCourseDirective ', () => {
@@ -42,6 +42,6 @@ describe('Component with HighlightCourseDirective ', () => {
 
   it('shouldn\'t have a border if its date is more than 2 weeks in a past', () => {
     const futureCourse = fixture.debugElement.query(By.css('.old-course'));
-    expect(futureCourse.nativeElement.style.borderColor).toBe('');
+    expect(futureCourse.nativeElement.style.borderColor).toBe('transparent');
   });
 });

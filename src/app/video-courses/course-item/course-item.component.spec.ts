@@ -15,7 +15,7 @@ describe('CourseItemComponent', () => {
     id: courseId,
     title: courseTitle,
     description: courseDescription,
-    date: (new Date()).valueOf() - 500000000,
+    date: new Date((new Date()).getTime() - 500000000),
     duration: 123
   };
 
@@ -43,7 +43,7 @@ describe('CourseItemComponent', () => {
     component.courseId = videoCourseItem.id;
     component.courseTitle = videoCourseItem.title;
     component.courseDescription = videoCourseItem.description;
-    component.courseDateMillis  = videoCourseItem.date;
+    component.courseDate  = videoCourseItem.date;
     component.courseDuration = videoCourseItem.duration;
     fixture.detectChanges();
   });
@@ -59,16 +59,9 @@ describe('CourseItemComponent', () => {
 
   it('should emit correct course id when click "Delete" button', () => {
     let deletedCourseId: number;
-    let date = new Date();
-    console.log(date.valueOf());
-    console.log(date.toDateString());
-    date = new Date(date.valueOf() - 500000000);
-    console.log(date.valueOf());
-    console.log(date.toDateString());
 
     component.courseDeleted.subscribe((id: number) => {
       deletedCourseId = id;
-      console.log('Delete button clicked');
     });
 
     deleteButton.triggerEventHandler('click', null);

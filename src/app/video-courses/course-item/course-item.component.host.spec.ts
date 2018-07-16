@@ -13,7 +13,7 @@ import { HighlightCourseDirective } from '../highlight-course.directive';
       [courseId]="course.id"
       [courseTitle]="course.title"
       [courseDescription]="course.description"
-      [courseDateMillis]="course.date"
+      [courseDate]="course.date"
       [courseDuration]="course.duration"
       (courseDeleted)="onCourseDeleted(course.id)">
     </app-course-item>`
@@ -26,7 +26,7 @@ class TestHostComponent {
     id: this.courseId,
     title: this.courseTitle,
     description: this.courseDescription,
-    date: (new Date()).valueOf() - 100000000,
+    date: new Date((new Date()).getTime() - 100000000),
     duration: 123
   };
   deletedId: number;
@@ -42,7 +42,12 @@ describe('CourseItemComponent with TestHost', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, TestHostComponent, CourseDurationPipe, HighlightCourseDirective],
+      declarations: [
+        CourseItemComponent,
+        TestHostComponent,
+        CourseDurationPipe,
+        HighlightCourseDirective
+      ],
       imports: [TruncateModule],
     });
   });

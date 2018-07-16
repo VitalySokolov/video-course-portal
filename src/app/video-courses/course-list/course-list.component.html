@@ -5,11 +5,11 @@
   [courseId]="course.id"
   [courseTitle]="course.title"
   [courseDescription]="course.description"
-  [courseDateMillis]="course.date"
+  [courseDate]="course.date"
   [courseDuration]="course.duration"
   (courseDeleted)="onCourseDeleted(course.id)">
 </app-course-item>
 <button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">
-  <span *ngIf="courseList.length">Load More</span>
-  <span *ngIf="!courseList.length">No data. Feel free to add new course</span>
+  <span *ngIf="courseList.length; else noCoursesAvailable">Load More</span>
+  <ng-template #noCoursesAvailable>No data. Feel free to add new course</ng-template>
 </button>

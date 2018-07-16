@@ -15,21 +15,21 @@ describe('CourseListComponent', () => {
       id: 123,
       title: 'Test Course 1',
       description: 'Description 1',
-      date: (new Date()).valueOf() - 500000000,
+      date: (new Date()).getTime() - 500000000,
       duration: 123
     },
     {
       id: 124,
       title: 'Test Course 2',
       description: 'Description 2',
-      date: (new Date()).valueOf(),
+      date: (new Date()).getTime(),
       duration: 124
     },
     {
       id: 125,
       title: 'Test Course 3',
       description: 'Description 3',
-      date: (new Date()).valueOf() + 500000000,
+      date: (new Date()).getTime() + 500000000,
       duration: 125
     }
   ];

@@ -1,12 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { VideoCourseItem } from './video-course-item.model';
 
 @Pipe({
   name: 'filterByTitle'
 })
 export class FilterByTitlePipe implements PipeTransform {
 
-  transform(allCourses: VideoCourseItem[], searchString: string): VideoCourseItem[] {
+  transform(allCourses: Partial<{title: string}>[], searchString: string): Partial<{title: string}>[] {
     if (!allCourses || !searchString) {
       return allCourses;
     }
