@@ -4,6 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseItemComponent } from './course-item.component';
 import { By } from '@angular/platform-browser';
 import { TruncateModule } from 'ng2-truncate';
+import { CourseDurationPipe } from '../course-duration.pipe';
+import { HighlightCourseDirective } from '../highlight-course.directive';
 
 @Component({
   template: `
@@ -24,7 +26,7 @@ class TestHostComponent {
     id: this.courseId,
     title: this.courseTitle,
     description: this.courseDescription,
-    date: new Date(),
+    date: new Date((new Date()).getTime() - 100000000),
     duration: 123
   };
   deletedId: number;
@@ -34,13 +36,18 @@ class TestHostComponent {
   }
 }
 
-describe('CourseItemComponent with Test Host', () => {
+describe('CourseItemComponent with TestHost', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, TestHostComponent],
+      declarations: [
+        CourseItemComponent,
+        TestHostComponent,
+        CourseDurationPipe,
+        HighlightCourseDirective
+      ],
       imports: [TruncateModule],
     });
   });
@@ -52,15 +59,15 @@ describe('CourseItemComponent with Test Host', () => {
   });
 
   it('should display course information', () => {
-    const title = fixture.debugElement.query(By.css('h3'));
-    const description = fixture.debugElement.query(By.css('p'));
+    const title = fixture.debugElement.query(By.css('.course-title'));
+    const description = fixture.debugElement.query(By.css('.course-description'));
 
-    expect(title.nativeElement.innerText).toBe(testHost.courseTitle);
+    expect(title.nativeElement.innerText).toBe(testHost.courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(testHost.courseDescription);
   });
 
   it('should emit correct course id when click "Delete" button', () => {
-    const deleteButton = fixture.debugElement.query(By.css('.btn-danger'));
+    const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
     deleteButton.triggerEventHandler('click', null);
 
     expect(testHost.deletedId).toBe(testHost.courseId);

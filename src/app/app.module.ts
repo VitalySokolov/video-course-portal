@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { TruncateModule } from 'ng2-truncate';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -13,7 +12,6 @@ import { VideoCoursesModule } from './video-courses/video-courses.module';
   imports: [
     BrowserModule,
     CoreModule,
-    // TrancateModule,
     VideoCoursesModule
   ],
   providers: [],

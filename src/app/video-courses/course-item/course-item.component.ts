@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CourseItemComponent {
   @Input() courseId: number;
+
   @Input() courseTitle: string;
   @Input() courseDescription: string;
   @Input() courseDate: Date;

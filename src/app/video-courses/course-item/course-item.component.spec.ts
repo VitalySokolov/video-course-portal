@@ -4,6 +4,8 @@ import { TruncateModule } from 'ng2-truncate';
 import { CourseItemComponent } from './course-item.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { CourseDurationPipe } from '../course-duration.pipe';
+import { HighlightCourseDirective } from '../highlight-course.directive';
 
 describe('CourseItemComponent', () => {
   const courseId = 123;
@@ -13,7 +15,7 @@ describe('CourseItemComponent', () => {
     id: courseId,
     title: courseTitle,
     description: courseDescription,
-    date: new Date(),
+    date: new Date((new Date()).getTime() - 500000000),
     duration: 123
   };
 
@@ -26,7 +28,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TruncateModule],
-      declarations: [CourseItemComponent]
+      declarations: [CourseItemComponent, CourseDurationPipe, HighlightCourseDirective]
     })
       .compileComponents();
   }));
@@ -51,7 +53,7 @@ describe('CourseItemComponent', () => {
   });
 
   it('should display course information', () => {
-    expect(title.nativeElement.innerText).toBe(courseTitle);
+    expect(title.nativeElement.innerText).toBe(courseTitle.toUpperCase());
     expect(description.nativeElement.innerText).toBe(courseDescription);
   });
 
@@ -60,7 +62,6 @@ describe('CourseItemComponent', () => {
 
     component.courseDeleted.subscribe((id: number) => {
       deletedCourseId = id;
-      console.log('Delete button clicked');
     });
 
     deleteButton.triggerEventHandler('click', null);

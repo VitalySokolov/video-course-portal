@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseListComponent } from './course-list.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { VideoCourseService } from '../video-course.service';
+import { FilterByTitlePipe } from '../filter-by-title.pipe';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -14,21 +15,21 @@ describe('CourseListComponent', () => {
       id: 123,
       title: 'Test Course 1',
       description: 'Description 1',
-      date: new Date(),
+      date: (new Date()).getTime() - 500000000,
       duration: 123
     },
     {
       id: 124,
       title: 'Test Course 2',
       description: 'Description 2',
-      date: new Date(),
+      date: (new Date()).getTime(),
       duration: 124
     },
     {
       id: 125,
       title: 'Test Course 3',
       description: 'Description 3',
-      date: new Date(),
+      date: (new Date()).getTime() + 500000000,
       duration: 125
     }
   ];
@@ -37,7 +38,7 @@ describe('CourseListComponent', () => {
     videoCourseService = {getVideoCourses: jasmine.createSpy('getVideoCourses').and.returnValue(videoCourses)};
 
     TestBed.configureTestingModule({
-      declarations: [CourseListComponent],
+      declarations: [CourseListComponent, FilterByTitlePipe],
       providers: [{provide: VideoCourseService, useValue: videoCourseService}],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

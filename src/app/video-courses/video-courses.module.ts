@@ -6,6 +6,9 @@ import { SearchCourseComponent } from './search-course/search-course.component';
 import { FormsModule } from '@angular/forms';
 
 import { TruncateModule } from 'ng2-truncate';
+import { CourseDurationPipe } from './course-duration.pipe';
+import { FilterByTitlePipe } from './filter-by-title.pipe';
+import { HighlightCourseDirective } from './highlight-course.directive';
 
 @NgModule({
   imports: [
@@ -13,7 +16,14 @@ import { TruncateModule } from 'ng2-truncate';
     FormsModule,
     TruncateModule
   ],
-  declarations: [CourseListComponent, CourseItemComponent, SearchCourseComponent],
+  declarations: [
+    CourseListComponent,
+    CourseItemComponent,
+    SearchCourseComponent,
+    CourseDurationPipe,
+    FilterByTitlePipe,
+    HighlightCourseDirective
+  ],
   exports: [CourseListComponent]
 })
 export class VideoCoursesModule {

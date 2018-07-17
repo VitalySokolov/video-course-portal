@@ -1,6 +1,7 @@
-<app-search-course></app-search-course>
+<app-search-course
+  (searchCourse)="onSearchCourseClick($event)"></app-search-course>
 <app-course-item
-  *ngFor="let course of courseList"
+  *ngFor="let course of courseList | filterByTitle: searchString"
   [courseId]="course.id"
   [courseTitle]="course.title"
   [courseDescription]="course.description"
@@ -8,4 +9,7 @@
   [courseDuration]="course.duration"
   (courseDeleted)="onCourseDeleted(course.id)">
 </app-course-item>
-<button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">Load More</button>
+<button class="btn btn-info btn-block mt-3" (click)="loadMoreCourses()">
+  <span *ngIf="courseList.length; else noCoursesAvailable">Load More</span>
+  <ng-template #noCoursesAvailable>No data. Feel free to add new course</ng-template>
+</button>
