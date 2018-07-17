@@ -19,7 +19,7 @@ export class HighlightCourseDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.el.nativeElement.style.border = `3px solid transparent`;
+    this.el.nativeElement.style.border = '3px solid transparent';
 
     const currentDate = new Date();
 
@@ -31,10 +31,10 @@ export class HighlightCourseDirective implements OnInit {
   }
 
   private highlightFutureCourse() {
-    this.el.nativeElement.style.borderColor = `blue`;
+    this.el.nativeElement.style.borderColor = 'blue';
   }
 
   private highlightFreshCourse() {
-    this.el.nativeElement.style.borderColor = `green`;
+    this.el.nativeElement.style.borderColor = 'green';
   }
 }
