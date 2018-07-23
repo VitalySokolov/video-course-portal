@@ -25,7 +25,7 @@ export class UserService {
     this.user = null;
   }
 
-  public isAuthorized(userName: string): boolean {
-    return !!this.user && this.user.name === userName;
+  public isAuthorized(): boolean {
+    return !!this.user;
   }
 }

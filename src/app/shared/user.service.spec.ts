@@ -22,30 +22,24 @@ describe('UserService', () => {
 
   it('should perform login', inject([UserService], (service: UserService) => {
     service.login(validUser);
-    expect(service.isAuthorized(userName)).toBe(true);
+    expect(service.isAuthorized()).toBe(true);
   }));
 
   it('should perform logout', inject([UserService], (service: UserService) => {
     service.login(validUser);
-    expect(service.isAuthorized(userName)).toBe(true);
+    expect(service.isAuthorized()).toBe(true);
 
     service.logout();
-    expect(service.isAuthorized(userName)).toBe(false);
+    expect(service.isAuthorized()).toBe(false);
   }));
 
   it('should not be authorized before login', inject([UserService], (service: UserService) => {
-    // service.login(validUser);
-    expect(service.isAuthorized(userName)).toBe(false);
-  }));
-
-  it('should not be authorized with incorrect user name', inject([UserService], (service: UserService) => {
-    service.login(validUser);
-    expect(service.isAuthorized('Other User')).toBe(false);
+    expect(service.isAuthorized()).toBe(false);
   }));
 
   it('should be authorized after login', inject([UserService], (service: UserService) => {
     service.login(validUser);
-    expect(service.isAuthorized(userName)).toBe(true);
+    expect(service.isAuthorized()).toBe(true);
   }));
 
   it('should return current user', inject([UserService], (service: UserService) => {

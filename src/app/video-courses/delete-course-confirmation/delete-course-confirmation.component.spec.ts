@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteCourseConfirmationComponent } from './delete-course-confirmation.component';
+import { MaterialModule } from '../../material/material.module';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 describe('DeleteCourseConfirmationComponent', () => {
   let component: DeleteCourseConfirmationComponent;
@@ -8,9 +10,13 @@ describe('DeleteCourseConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteCourseConfirmationComponent ]
+      declarations: [DeleteCourseConfirmationComponent],
+      imports: [MaterialModule],
+      providers: [
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

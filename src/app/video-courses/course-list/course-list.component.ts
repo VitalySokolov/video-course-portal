@@ -17,6 +17,10 @@ export class CourseListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refreshCourseList();
+  }
+
+  refreshCourseList() {
     this.courseList = this.videoCourseService.getVideoCourses();
   }
 
@@ -29,9 +33,8 @@ export class CourseListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(`Course with id ${courseId} deleted.`);
-      } else {
-        console.log('User changed his mind');
+        this.videoCourseService.removeCourse(courseId);
+        this.refreshCourseList();
       }
     });
   }
