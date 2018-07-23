@@ -85,7 +85,7 @@ export class VideoCourseService {
     return this.courseList;
   }
 
-  public createCourse(course: VideoCourseItem): VideoCourseItem {
+  public addCourse(course: VideoCourseItem): VideoCourseItem {
     const currentId = this.courseList.length ? this.courseList.slice(-1)[0].id + 1 : 1;
 
     course.id = currentId;
