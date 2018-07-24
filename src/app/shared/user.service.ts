@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
+import { AuthData } from './auth-data.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-// {
-//   name: 'Current User',
-//   eMail: 'current_user@email.com',
-//   password: ''
-// }
-
+  public authChange = new Subject<boolean>();
   private user: User;
 
   public getUserInfo(): User {
-    return this.user;
+    return {...this.user};
   }
 
-  public login(user: User): void {
-    this.user = user;
+  public login(user: AuthData): void {
+    console.log('LOGIN');
+    this.user = {
+      name: user.name,
+      token: Math.round(Math.random() * 10000).toString()
+    };
+    this.authChange.next(true);
   }
 
   public logout(): void {
     this.user = null;
+    this.authChange.next(false);
   }
 
   public isAuthorized(): boolean {
