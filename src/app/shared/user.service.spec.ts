@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { UserService } from './user.service';
-import { User } from './user.model';
+import { AuthData } from './auth-data.model';
 
 describe('UserService', () => {
   const userName = 'name';
-  const validUser: User = {
+  const validUser: AuthData = {
     name: userName,
     password: 'password'
   };

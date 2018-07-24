@@ -15,7 +15,6 @@ export class UserService {
   }
 
   public login(user: AuthData): void {
-    console.log('LOGIN');
     this.user = {
       name: user.name,
       token: Math.round(Math.random() * 10000).toString()

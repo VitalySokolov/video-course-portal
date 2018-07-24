@@ -5,6 +5,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
+  MatToolbarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -14,12 +15,14 @@ import {
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    MatToolbarModule,
   ],
   exports: [
     FlexLayoutModule,
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    MatToolbarModule,
   ],
   declarations: []
 })

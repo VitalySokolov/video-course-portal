@@ -10,24 +10,21 @@ import { UserService } from '../../shared/user.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private userServise: UserService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
       login: new FormControl('', {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.email]
       }),
       password: new FormControl('', { validators: [Validators.required] })
     });
   }
 
   onSubmit() {
-    console.log(this.loginForm);
-    console.log(this.loginForm.value.login);
-    console.log(this.loginForm.value.password);
-    this.userServise.login({
-      name: this.loginForm.value.name,
+    this.userService.login({
+      name: this.loginForm.value.login,
       password: this.loginForm.value.password
     });
   }
