@@ -6,7 +6,6 @@ import { CoreModule } from './core/core.module';
 import { VideoCoursesModule } from './video-courses/video-courses.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
-import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { MaterialModule } from './material/material.module';
     BrowserAnimationsModule,
     BrowserModule,
     CoreModule,
-    MaterialModule,
     VideoCoursesModule
   ],
   providers: [],

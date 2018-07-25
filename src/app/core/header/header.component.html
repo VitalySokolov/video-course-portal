@@ -2,18 +2,25 @@
   <div><a href="#">LOGO</a></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li *ngIf="!isAuth">
-        <a href="#">Signup</a>
-      </li>
-      <li *ngIf="!isAuth">
-        <a href="#">Login</a>
-      </li>
-      <li *ngIf="isAuth">
-        <a href="#">{{currentUser.name}}</a>
-      </li>
-      <li *ngIf="isAuth">
-        <a style="cursor: pointer" (click)="onLogout()">Logout</a>
-      </li>
+      <ng-container
+        *ngIf="isAuth; then loggedIn; else loggedOut">
+      </ng-container>
+      <ng-template #loggedOut>
+        <li>
+          <a href="#">Signup</a>
+        </li>
+        <li>
+          <a href="#">Login</a>
+        </li>
+      </ng-template>
+      <ng-template #loggedIn>
+        <li>
+          <a href="#">{{currentUser.name}}</a>
+        </li>
+        <li>
+          <a class="menu-logout" (click)="onLogout()">Logout</a>
+        </li>
+      </ng-template>
     </ul>
   </div>
 </mat-toolbar>

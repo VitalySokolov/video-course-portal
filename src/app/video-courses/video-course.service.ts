@@ -78,24 +78,20 @@ export class VideoCourseService {
     },
   ];
 
-  constructor() {
-  }
-
   public getVideoCourses(): VideoCourseItem[] {
     return this.courseList;
   }
 
   public addCourse(course: VideoCourseItem): VideoCourseItem {
-    const currentId = this.courseList.length ? this.courseList.slice(-1)[0].id + 1 : 1;
-
-    course.id = currentId;
-    this.courseList = [...this.courseList, course];
+    const list = this.courseList;
+    course.id = list.length ? ++list[list.length - 1].id : 1;
+    this.courseList = [...list, course];
 
     return course;
   }
 
-  public getCourse(id: number): VideoCourseItem {
-    return this.courseList.find(course => course.id === id);
+  public getCourse(id: number): VideoCourseItem | undefined {
+    return this.courseList.find((course) => course.id === id);
   }
 
   public removeCourse(id: number): void {
@@ -103,11 +99,8 @@ export class VideoCourseService {
   }
 
   public updateCourse(updatedCourse: VideoCourseItem): void {
-    const index = this.courseList.findIndex((course) => course.id === updatedCourse.id);
-    this.courseList = [
-      ...this.courseList.slice(0, index),
-      updatedCourse,
-      ...this.courseList.slice(index + 1, this.courseList.length)
-    ];
+    this.courseList = this.courseList.map((course) => {
+      return course.id === updatedCourse.id ? updatedCourse : course;
+    });
   }
 }
