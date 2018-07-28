@@ -1,7 +1,10 @@
 <app-header></app-header>
-<app-breadcrumbs></app-breadcrumbs>
-<div class="container">
-  <app-course-list></app-course-list>
-</div>
+<app-login *ngIf="!userService.isAuthorized(); else userAuth"></app-login>
+<ng-template #userAuth>
+  <app-breadcrumbs></app-breadcrumbs>
+  <div class="container">
+    <app-course-list></app-course-list>
+  </div>
+</ng-template>
 <app-footer></app-footer>
 

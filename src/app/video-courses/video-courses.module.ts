@@ -9,12 +9,15 @@ import { TruncateModule } from 'ng2-truncate';
 import { CourseDurationPipe } from './course-duration.pipe';
 import { FilterByTitlePipe } from './filter-by-title.pipe';
 import { HighlightCourseDirective } from './highlight-course.directive';
+import { MaterialModule } from '../material/material.module';
+import { DeleteCourseConfirmationComponent } from './delete-course-confirmation/delete-course-confirmation.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    TruncateModule
+    TruncateModule,
+    MaterialModule
   ],
   declarations: [
     CourseListComponent,
@@ -22,9 +25,11 @@ import { HighlightCourseDirective } from './highlight-course.directive';
     SearchCourseComponent,
     CourseDurationPipe,
     FilterByTitlePipe,
-    HighlightCourseDirective
+    HighlightCourseDirective,
+    DeleteCourseConfirmationComponent
   ],
-  exports: [CourseListComponent]
+  exports: [CourseListComponent],
+  entryComponents: [DeleteCourseConfirmationComponent]
 })
 export class VideoCoursesModule {
 }

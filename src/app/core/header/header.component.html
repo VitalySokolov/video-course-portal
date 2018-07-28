@@ -1,27 +1,26 @@
-<header class="navbar navbar-light bg-light p-0">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="http://placehold.it/300x60?text=Video Portal" width="150" height="30" alt="Video Portal">
-    </a>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown mr-3">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-user"></i> {{currentUser.name}}
-        </a>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-user-circle"></i> Profile
-          </a>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-gear"></i> Settings
-          </a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fa fa-user-times"></i> Logout
-        </a>
-      </li>
+<mat-toolbar color="primary">
+  <div><a href="#">LOGO</a></div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+      <ng-container
+        *ngIf="isAuth; then loggedIn; else loggedOut">
+      </ng-container>
+      <ng-template #loggedOut>
+        <li>
+          <a href="#">Signup</a>
+        </li>
+        <li>
+          <a href="#">Login</a>
+        </li>
+      </ng-template>
+      <ng-template #loggedIn>
+        <li>
+          <a href="#">{{currentUser.name}}</a>
+        </li>
+        <li>
+          <a class="menu-logout" (click)="onLogout()">Logout</a>
+        </li>
+      </ng-template>
     </ul>
   </div>
-</header>
+</mat-toolbar>

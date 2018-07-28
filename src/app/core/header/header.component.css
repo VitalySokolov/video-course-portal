@@ -1,0 +1,19 @@
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:hover,
+a:focus {
+  color: #d3d3d3;
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-logout {
+  cursor: pointer;
+}
