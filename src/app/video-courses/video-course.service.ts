@@ -91,6 +91,7 @@ export class VideoCourseService {
   }
 
   public getCourse(id: number): VideoCourseItem | undefined {
+    console.log(`ID = ${id}, Type = ${typeof id}`);
     return this.courseList.find((course) => course.id === id);
   }
 
