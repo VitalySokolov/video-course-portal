@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 const BASE_URL = 'http://localhost:3004';
@@ -13,7 +14,7 @@ export class UserService {
   public authChange = new Subject<boolean>();
   private user: User;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   public getUserInfo(): User {
@@ -34,11 +35,13 @@ export class UserService {
       token: Math.round(Math.random() * 10000).toString()
     };
     this.authChange.next(true);
+    this.router.navigate(['/courses']);
   }
 
   public logout(): void {
     this.user = null;
     this.authChange.next(false);
+    this.router.navigate(['/login']);
   }
 
   public isAuthorized(): boolean {

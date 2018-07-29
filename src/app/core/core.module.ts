@@ -5,9 +5,11 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppRoutingModule } from '../app.routing.module';
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     CommonModule,
     FlexLayoutModule,
     MatToolbarModule
