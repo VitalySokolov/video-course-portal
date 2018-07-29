@@ -12,7 +12,7 @@
         type="text"
         matInput
         placeholder="Course Title"
-        ngModel
+        [(ngModel)]="course.title"
         name="title"
         required
         #titleInput="ngModel">
@@ -22,7 +22,7 @@
       <textarea
         matInput
         placeholder="Course Description"
-        ngModel
+        [(ngModel)]="course.description"
         name="description"
         required
         #descriptionInput="ngModel">
@@ -45,7 +45,7 @@
         type="number"
         matInput
         placeholder="Course Duration"
-        ngModel
+        [(ngModel)]="course.duration"
         name="duration"
         required
         #durationInput="ngModel">
