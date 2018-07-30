@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../shared/user.model';
 import { UserService } from '../../shared/user.service';
 import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuth = false;
   private authSubscription: Subscription;
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {

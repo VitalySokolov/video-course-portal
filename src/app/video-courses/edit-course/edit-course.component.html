@@ -6,7 +6,7 @@
     fxFlex.sm="70%"
     fxFlex.gt-sm="700px"
     #f="ngForm"
-    (ngSubmit)="onSubmit(f)">
+    (ngSubmit)="onSubmit()">
     <mat-form-field>
       <input
         type="text"
@@ -34,7 +34,7 @@
         matInput
         placeholder="Course Start Date"
         [matDatepicker]="picker"
-        ngModel
+        [(ngModel)]="course.date"
         name="date"
         required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
