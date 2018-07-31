@@ -49,7 +49,10 @@ describe('CourseItemComponent with TestHost', () => {
         CourseDurationPipe,
         HighlightCourseDirective
       ],
-      imports: [TruncateModule, RouterTestingModule],
+      imports: [
+        TruncateModule,
+        RouterTestingModule
+      ],
     });
   });
 
