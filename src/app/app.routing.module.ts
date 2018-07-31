@@ -4,6 +4,7 @@ import { Route, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/auth.guard';
 import { EditCourseComponent } from './video-courses/edit-course/edit-course.component';
 import { NgModule } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 
 export const ROUTES: Route[] = [
   {path: '', redirectTo: 'courses', pathMatch: 'full'},
@@ -16,7 +17,7 @@ export const ROUTES: Route[] = [
 @NgModule({
   imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, {provide: APP_BASE_HREF, useValue : '/' }]
 })
 export class AppRoutingModule {
 }

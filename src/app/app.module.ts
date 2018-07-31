@@ -7,7 +7,6 @@ import { VideoCoursesModule } from './video-courses/video-courses.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app.routing.module';
-import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { APP_BASE_HREF } from '@angular/common';
     AppRoutingModule,
     VideoCoursesModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
