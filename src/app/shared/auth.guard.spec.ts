@@ -1,12 +1,21 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
 import { AuthGuard } from './auth.guard';
-import { AppRoutingModule } from '../app.routing.module';
+import { Component } from '@angular/core';
+
+@Component({
+  template: `Login`
+})
+class TestLoginComponent {
+}
 
 describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AppRoutingModule, AuthGuard]
+      declarations: [TestLoginComponent],
+      imports: [RouterTestingModule.withRoutes([{path: 'login', component: TestLoginComponent}])],
+      providers: [AuthGuard]
     });
   });
 

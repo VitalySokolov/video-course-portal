@@ -84,7 +84,7 @@ export class VideoCourseService {
 
   public addCourse(course: VideoCourseItem): VideoCourseItem {
     const list = this.courseList;
-    course.id = list.length ? ++list[list.length - 1].id : 1;
+    course.id = list.length ? list[list.length - 1].id + 1 : 1;
     this.courseList = [...list, course];
 
     return course;

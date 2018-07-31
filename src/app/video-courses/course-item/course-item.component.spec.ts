@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CourseDurationPipe } from '../course-duration.pipe';
 import { HighlightCourseDirective } from '../highlight-course.directive';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CourseItemComponent', () => {
   const courseId = 123;
@@ -27,7 +28,7 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TruncateModule],
+      imports: [TruncateModule, RouterTestingModule],
       declarations: [CourseItemComponent, CourseDurationPipe, HighlightCourseDirective]
     })
       .compileComponents();

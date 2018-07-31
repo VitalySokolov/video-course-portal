@@ -7,15 +7,15 @@
       </ng-container>
       <ng-template #loggedOut>
         <li>
-          <a href="#">Signup</a>
+          <a routerLink="/login">Signup</a>
         </li>
         <li>
-          <a href="#">Login</a>
+          <a routerLink="/login">Login</a>
         </li>
       </ng-template>
       <ng-template #loggedIn>
         <li>
-          <a routerLink="../courses" [routerLinkActive]="'active'">{{currentUser.name}}</a>
+          <a routerLink="/courses" [routerLinkActive]="'active'">{{currentUser.name}}</a>
         </li>
         <li>
           <a class="menu-logout" (click)="onLogout()">Logout</a>
