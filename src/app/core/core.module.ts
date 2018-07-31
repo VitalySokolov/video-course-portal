@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app.routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -17,12 +18,14 @@ import { AppRoutingModule } from '../app.routing.module';
   declarations: [
     HeaderComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    PageNotFoundComponent
   ],
   exports: [
     HeaderComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    PageNotFoundComponent
   ]
 })
 export class CoreModule {
