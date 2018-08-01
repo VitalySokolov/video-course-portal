@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { VideoCourseService } from '../video-course.service';
+import { VideoCourseService } from '@video-courses/video-course.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VideoCourseItem } from '../video-course-item.model';
+import { VideoCourseItem } from '@video-courses/video-course-item.model';
 
 @Component({
   selector: 'app-edit-course',
@@ -12,7 +12,9 @@ import { VideoCourseItem } from '../video-course-item.model';
 export class EditCourseComponent implements OnInit {
   course: VideoCourseItem;
 
-  constructor(private courseService: VideoCourseService, private route: ActivatedRoute, private router: Router) {
+  constructor(private courseService: VideoCourseService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
