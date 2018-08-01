@@ -1,7 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "paths": {
+      "@auth/*": ["app/auth/*"],
+      "@core/*": ["app/core/*"],
+      "@material/*": ["app/material/*"],
+      "@shared/*": ["app/shared/*"],
+      "@video-courses/*": ["app/video-courses/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
