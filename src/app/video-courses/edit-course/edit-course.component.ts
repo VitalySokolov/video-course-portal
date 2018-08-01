@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { VideoCourseService } from '@video-courses/video-course.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { VideoCourseService } from '@video-courses/video-course.service';
 import { VideoCourseItem } from '@video-courses/video-course-item.model';
 
 @Component({
