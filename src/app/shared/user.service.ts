@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
+const BASE_URL = 'http://localhost:3004';
 
 const BASE_URL = 'http://localhost:3004';
 
