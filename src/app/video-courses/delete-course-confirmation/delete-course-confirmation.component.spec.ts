@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteCourseConfirmationComponent } from './delete-course-confirmation.component';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from '@material/material.module';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 describe('DeleteCourseConfirmationComponent', () => {

@@ -1,0 +1,59 @@
+<section fxLayout fxLayoutAlign="center">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxFlex="90%"
+    fxFlex.sm="70%"
+    fxFlex.gt-sm="700px"
+    #f="ngForm"
+    (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Course Title"
+        [(ngModel)]="course.title"
+        name="title"
+        required
+        #titleInput="ngModel">
+      <mat-error *ngIf="titleInput.hasError('required')">Field must not be empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        placeholder="Course Description"
+        [(ngModel)]="course.description"
+        name="description"
+        required
+        #descriptionInput="ngModel">
+      </textarea>
+      <mat-error *ngIf="descriptionInput.hasError('required')">Field must not be empty</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Course Start Date"
+        [matDatepicker]="picker"
+        [(ngModel)]="course.date"
+        name="date"
+        required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="number"
+        matInput
+        placeholder="Course Duration"
+        [(ngModel)]="course.duration"
+        name="duration"
+        required
+        #durationInput="ngModel">
+      <mat-error *ngIf="durationInput.hasError('required')">Field must not be empty</mat-error>
+    </mat-form-field>
+    <div fxLayout fxLayoutGap="2em">
+      <button type="submit" mat-raised-button [disabled]="f.invalid">Submit</button>
+      <button type="button" mat-raised-button (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</section>

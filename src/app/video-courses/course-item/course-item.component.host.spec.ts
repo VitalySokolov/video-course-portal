@@ -6,6 +6,7 @@ import { By } from '@angular/platform-browser';
 import { TruncateModule } from 'ng2-truncate';
 import { CourseDurationPipe } from '../course-duration.pipe';
 import { HighlightCourseDirective } from '../highlight-course.directive';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
   template: `
@@ -48,7 +49,10 @@ describe('CourseItemComponent with TestHost', () => {
         CourseDurationPipe,
         HighlightCourseDirective
       ],
-      imports: [TruncateModule],
+      imports: [
+        TruncateModule,
+        RouterTestingModule
+      ],
     });
   });
 

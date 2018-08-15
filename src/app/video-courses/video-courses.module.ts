@@ -11,6 +11,7 @@ import { FilterByTitlePipe } from './filter-by-title.pipe';
 import { HighlightCourseDirective } from './highlight-course.directive';
 import { MaterialModule } from '../material/material.module';
 import { DeleteCourseConfirmationComponent } from './delete-course-confirmation/delete-course-confirmation.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
 
 @NgModule({
   imports: [
@@ -26,9 +27,10 @@ import { DeleteCourseConfirmationComponent } from './delete-course-confirmation/
     CourseDurationPipe,
     FilterByTitlePipe,
     HighlightCourseDirective,
-    DeleteCourseConfirmationComponent
+    DeleteCourseConfirmationComponent,
+    EditCourseComponent
   ],
-  exports: [CourseListComponent],
+  exports: [CourseListComponent, EditCourseComponent],
   entryComponents: [DeleteCourseConfirmationComponent]
 })
 export class VideoCoursesModule {

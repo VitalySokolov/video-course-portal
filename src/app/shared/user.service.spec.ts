@@ -2,6 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { UserService } from './user.service';
 import { AuthData } from './auth-data.model';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserService', () => {
   const userName = 'name';
@@ -12,6 +13,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [UserService]
     });
   });

@@ -6,6 +6,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonModule,
 } from '@angular/material';
 
 @NgModule({
@@ -16,6 +19,9 @@ import {
     MatInputModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -23,6 +29,9 @@ import {
     MatInputModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule,
   ],
   declarations: []
 })
