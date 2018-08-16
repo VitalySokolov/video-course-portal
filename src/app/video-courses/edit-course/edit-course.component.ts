@@ -23,7 +23,7 @@ export class EditCourseComponent implements OnInit {
       if (data['id']) {
         this.course = this.courseService.getCourse(+data['id']);
       } else {
-        this.course = {id: 0, title: '', description: '', date: null, duration: 0};
+        this.course = {id: 0, title: '', description: '', date: null, duration: 0, authors: [], isTopRated: false};
       }
     });
   }

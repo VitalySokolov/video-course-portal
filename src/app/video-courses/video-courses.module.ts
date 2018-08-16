@@ -12,11 +12,13 @@ import { HighlightCourseDirective } from './highlight-course.directive';
 import { MaterialModule } from '../material/material.module';
 import { DeleteCourseConfirmationComponent } from './delete-course-confirmation/delete-course-confirmation.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     TruncateModule,
     MaterialModule
   ],

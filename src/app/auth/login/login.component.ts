@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  private userLogin: Subscription;
+  private userLoginSubscription: Subscription;
 
   constructor(private userService: UserService) {
   }
@@ -20,12 +20,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       login: new FormControl('', {
         validators: [Validators.required]
       }),
-      password: new FormControl('', { validators: [Validators.required] })
+      password: new FormControl('', {validators: [Validators.required]})
     });
+
+    this.userLoginSubscription = this.userService.authFailed.subscribe(
+      (error) => {
+        // this.loginForm.value.password = '';
+        console.log('LOGIN FAILED ' + error);
+      }
+    );
   }
 
   ngOnDestroy(): void {
-    // this.userLogin.unsubscribe();
+    this.userLoginSubscription.unsubscribe();
   }
 
   onSubmit() {
