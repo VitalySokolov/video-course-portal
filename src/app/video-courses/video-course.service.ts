@@ -42,6 +42,8 @@ export class VideoCourseService {
   }
 
   public addCourse(course: VideoCourseItem): VideoCourseItem {
+    this.httpClient.post(`${this.BASE_URL}`, course)
+      .subscribe();
     const list = this.courseList;
     course.id = list.length ? list[list.length - 1].id + 1 : 1;
     this.courseList = [...list, course];
@@ -55,13 +57,13 @@ export class VideoCourseService {
 
   public removeCourse(id: number): void {
     this.httpClient.delete(`${this.BASE_URL}/${id}`)
-      .subscribe(result => console.log(result));
+      .subscribe();
     this.courseList = this.courseList.filter((course) => course.id !== id);
   }
 
   public updateCourse(updatedCourse: VideoCourseItem): void {
     this.httpClient.put(`${this.BASE_URL}/${updatedCourse.id}`, updatedCourse)
-      .subscribe(result => console.log(result));
+      .subscribe();
     this.courseList = this.courseList.map((course) => {
       return course.id === updatedCourse.id ? updatedCourse : course;
     });

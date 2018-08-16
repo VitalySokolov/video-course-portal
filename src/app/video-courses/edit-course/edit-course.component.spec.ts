@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { EditCourseComponent } from './edit-course.component';
 import { MaterialModule } from '@material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('EditCourseComponent', () => {
   let component: EditCourseComponent;
@@ -15,6 +16,7 @@ describe('EditCourseComponent', () => {
       imports: [
         BrowserAnimationsModule,
         FormsModule,
+        HttpClientModule,
         MaterialModule,
         RouterTestingModule
       ],

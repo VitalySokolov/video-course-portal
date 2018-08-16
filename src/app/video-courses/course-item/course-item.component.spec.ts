@@ -17,7 +17,9 @@ describe('CourseItemComponent', () => {
     title: courseTitle,
     description: courseDescription,
     date: new Date((new Date()).getTime() - 500000000),
-    duration: 123
+    duration: 123,
+    authors: [],
+    isTopRated: true
   };
 
   let component: CourseItemComponent;

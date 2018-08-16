@@ -5,6 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { VideoCourseService } from '../video-course.service';
 import { FilterByTitlePipe } from '../filter-by-title.pipe';
 import { MaterialModule } from '@material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -40,7 +41,7 @@ describe('CourseListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [CourseListComponent, FilterByTitlePipe],
-      imports: [MaterialModule],
+      imports: [HttpClientModule, MaterialModule],
       providers: [{provide: VideoCourseService, useValue: videoCourseService}],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

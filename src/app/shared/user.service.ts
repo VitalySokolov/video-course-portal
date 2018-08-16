@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { Subject } from 'rxjs';
+import { pipe, Subject } from 'rxjs';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,12 +15,9 @@ import { AuthData } from './auth-data.model';
 export class UserService {
   readonly BASE_URL = 'http://localhost:3004';
   public authChange = new Subject<boolean>();
-  public authFailed = new Subject<string>();
   private user: User;
 
   constructor(private http: HttpClient, private router: Router) {
-    console.log(`Constructor. `);
-    this.authFailed = new Subject<string>();
     this.authChange = new Subject<boolean>();
   }
 
@@ -27,25 +25,18 @@ export class UserService {
     return {...this.user};
   }
 
-  public login(user: AuthData): void {
-    this.http.post(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
-      .subscribe(
-        res => this.loginOk(res, user),
-        error => this.loginFailed(error)
-      );
-  }
-
-  private loginOk(response, user: AuthData) {
-    this.user = {
-      name: user.name,
-      token: response.token
-    };
-    this.authChange.next(true);
-    this.router.navigate(['/courses']);
-  }
-
-  public loginFailed(error) {
-    this.authFailed.next(error.error);
+  public login(user: AuthData) {
+    return this.http.post<any>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
+      .pipe(
+      tap((response) => {
+        console.log(`Response = ${JSON.stringify(response)}`);
+        this.user = {
+          name: user.name,
+          token: response.token
+        };
+        this.authChange.next(true);
+      })
+    );
   }
 
   public logout(): void {

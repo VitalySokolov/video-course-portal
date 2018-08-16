@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../shared/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  private userLoginSubscription: Subscription;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -22,23 +22,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       }),
       password: new FormControl('', {validators: [Validators.required]})
     });
-
-    this.userLoginSubscription = this.userService.authFailed.subscribe(
-      (error) => {
-        // this.loginForm.value.password = '';
-        console.log('LOGIN FAILED ' + error);
-      }
-    );
-  }
+    }
 
   ngOnDestroy(): void {
-    this.userLoginSubscription.unsubscribe();
+    // this.userLoginSubscription.unsubscribe();
   }
 
   onSubmit() {
     this.userService.login({
       name: this.loginForm.value.login,
       password: this.loginForm.value.password
-    });
+    })
+      .subscribe((response) => {
+          this.router.navigate(['/courses']);
+        },
+        (error) => {
+          console.log(`ERROR = ${JSON.stringify(error)}`);
+          console.log('LOGIN FAILED ' + error.error);
+        });
   }
 }
