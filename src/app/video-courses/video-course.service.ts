@@ -27,28 +27,27 @@ export class VideoCourseService {
     this.httpClient.get<CourseItem[]>(`${this.BASE_URL}?start=${startIndex}&count=${amount}`)
       .subscribe(response => {
         this.courseList = response.map(course => {
-          return {
-            id: course.id,
-            title: course.name,
-            description: course.description,
-            authors: course.authors.slice(),
-            duration: course.length,
-            date: new Date(course.date),
-            isTopRated: course.isTopRated
-          };
+          return this.convertToVideoCourseItem(course);
         });
         this.courseListChange.next(this.courseList);
       });
   }
 
-  public addCourse(course: VideoCourseItem): VideoCourseItem {
-    this.httpClient.post(`${this.BASE_URL}`, course)
-      .subscribe();
-    const list = this.courseList;
-    course.id = list.length ? list[list.length - 1].id + 1 : 1;
-    this.courseList = [...list, course];
+  public addCourse(course: VideoCourseItem): void {
+    const courseForUpdate = {
+      ...course,
+      name: course.title,
+      length: course.duration,
+      date: course.date.toDateString()
+    };
 
-    return course;
+    this.httpClient.post<CourseItem>(`${this.BASE_URL}`, courseForUpdate)
+      .subscribe(updatedCourse => {
+        console.log(`NEW COURSE = ${JSON.stringify(updatedCourse)}`);
+        course.id = updatedCourse.id;
+        this.courseList = [...this.courseList, course];
+        this.courseListChange.next(this.courseList);
+      });
   }
 
   public getCourse(id: number): VideoCourseItem | undefined {
@@ -61,11 +60,43 @@ export class VideoCourseService {
     this.courseList = this.courseList.filter((course) => course.id !== id);
   }
 
-  public updateCourse(updatedCourse: VideoCourseItem): void {
-    this.httpClient.put(`${this.BASE_URL}/${updatedCourse.id}`, updatedCourse)
-      .subscribe();
-    this.courseList = this.courseList.map((course) => {
-      return course.id === updatedCourse.id ? updatedCourse : course;
-    });
+  public updateCourse(videoCourse: VideoCourseItem): void {
+    const courseForUpdate = {
+      ...videoCourse,
+      name: videoCourse.title,
+      length: videoCourse.duration,
+      date: videoCourse.date.toDateString()
+    };
+    console.log(`COURSE FOR UPDATE = ${JSON.stringify(courseForUpdate)}`);
+    this.httpClient.put<CourseItem>(`${this.BASE_URL}/${courseForUpdate.id}`, courseForUpdate)
+      .subscribe((updatedCourseItem) => {
+          console.log(`UPDATED = ${JSON.stringify(updatedCourseItem)}`);
+          const updatedCourse = this.convertToVideoCourseItem(updatedCourseItem);
+
+          this.courseList = this.courseList.map((course) => {
+            return course.id === updatedCourse.id ? updatedCourse : course;
+          });
+          console.log(`Course List Updated`);
+          this.courseListChange.next(this.courseList);
+        },
+        (error) => {
+          this.courseList = this.courseList.map((course) => {
+            return course.id === videoCourse.id ? videoCourse : course;
+          });
+          console.log(`Course List ERROR = ${JSON.stringify(this.courseList)}`);
+          this.courseListChange.next(this.courseList);
+        });
+  }
+
+  private convertToVideoCourseItem(course: CourseItem): VideoCourseItem {
+    return {
+      id: course.id,
+      title: course.name,
+      description: course.description,
+      authors: course.authors.slice(),
+      duration: course.length,
+      date: new Date(course.date),
+      isTopRated: course.isTopRated
+    };
   }
 }
