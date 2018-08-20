@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../shared/user.service';
-import { Subscription } from 'rxjs';
+import { UserService } from '@shared/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessage = '';
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -20,13 +20,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       login: new FormControl('', {
         validators: [Validators.required]
       }),
-      password: new FormControl('', {validators: [Validators.required]})
+      password: new FormControl('', {
+        validators: [Validators.required]
+      })
     });
     }
-
-  ngOnDestroy(): void {
-    // this.userLoginSubscription.unsubscribe();
-  }
 
   onSubmit() {
     this.userService.login({
@@ -34,11 +32,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.loginForm.value.password
     })
       .subscribe((response) => {
+          this.errorMessage = '';
           this.router.navigate(['/courses']);
         },
         (error) => {
-          console.log(`ERROR = ${JSON.stringify(error)}`);
-          console.log('LOGIN FAILED ' + error.error);
+          this.errorMessage = error.error;
         });
   }
 }

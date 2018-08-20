@@ -5,7 +5,7 @@ import { VideoCourseItem } from './video-course-item.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-fdescribe('VideoCourseService', () => {
+describe('VideoCourseService', () => {
   const newCourseId = 1234;
   const existingCourseId = 8693;
   const testCourseTitle = 'Course Title';
@@ -72,14 +72,14 @@ fdescribe('VideoCourseService', () => {
   }));
 
   it('should get all courses', inject([VideoCourseService], (service: VideoCourseService) => {
-    service.courseListChange.subscribe(courses => expect(courses.length).toBe(2));
+    service.getCourseListChange().subscribe(courses => expect(courses.length).toBe(2));
 
     initService(service);
   }));
 
   it('should add course', inject([VideoCourseService], (service: VideoCourseService) => {
-    const updatedCourseJson = {
-      'id': existingCourseId,
+    const newCourseJson = {
+      'id': newCourseId,
       'name': testCourseTitle,
       'description': 'Description',
       'isTopRated': false,
@@ -94,13 +94,11 @@ fdescribe('VideoCourseService', () => {
 
     service.addCourse(courseItem);
 
+    const req = httpTestingController.expectOne(`${testLoginUrl}`);
+    expect(req.request.method).toEqual('POST');
+    req.flush(newCourseJson);
 
-    const req = httpTestingController.expectOne(`${testLoginUrl}/${existingCourseId}`);
-    expect(req.request.method).toEqual('PUT');
-    req.flush(updatedCourseJson);
-
-    // expect(newCourse.id).toBe(testCourseId);
-    // expect(newCourse.title).toBe(testCourseTitle);
+    expect(service.getCourse(newCourseId).title).toBe(testCourseTitle);
   }));
 
   it('should get course', inject([VideoCourseService], (service: VideoCourseService) => {
@@ -130,7 +128,7 @@ fdescribe('VideoCourseService', () => {
 
     expect(service.getCourse(existingCourseId).title).not.toBe(testCourseTitle);
     service.updateCourse(updatedCourse);
-    service.courseListChange.subscribe(courses => {
+    service.getCourseListChange().subscribe(courses => {
       expect(courses.length).toBe(2);
       expect(service.getCourse(existingCourseId).title).toBe(testCourseTitle);
     });
@@ -153,7 +151,7 @@ fdescribe('VideoCourseService', () => {
   const initService = (service: VideoCourseService) => {
     service.getVideoCourses();
 
-    const req = httpTestingController.expectOne(testLoginUrl + '?start=0&count=20');
+    const req = httpTestingController.expectOne(testLoginUrl);
     expect(req.request.method).toEqual('GET');
     req.flush(getAllResponse);
   };

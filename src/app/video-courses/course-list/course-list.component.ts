@@ -19,7 +19,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.courseListSubscription = this.videoCourseService.courseListChange
+    this.courseListSubscription = this.videoCourseService.getCourseListChange()
       .subscribe((courseList) => {
         this.courseList = courseList;
       });

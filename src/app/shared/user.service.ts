@@ -29,7 +29,6 @@ export class UserService {
     return this.http.post<any>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
       .pipe(
       tap((response) => {
-        console.log(`Response = ${JSON.stringify(response)}`);
         this.user = {
           name: user.name,
           token: response.token
