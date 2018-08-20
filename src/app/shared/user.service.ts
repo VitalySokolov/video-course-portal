@@ -8,7 +8,6 @@ import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { tap } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })
