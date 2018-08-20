@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { VideoCourseItem } from '../video-course-item.model';
 import { VideoCourseService } from '../video-course.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { DeleteCourseConfirmationComponent } from '../delete-course-confirmation/delete-course-confirmation.component';
 import { Subscription } from 'rxjs';
 
@@ -14,14 +14,24 @@ export class CourseListComponent implements OnInit, OnDestroy {
   courseList: VideoCourseItem[] = [];
   searchString: string;
   private courseListSubscription: Subscription;
+  private serverErrorSubscription: Subscription;
 
-  constructor(private videoCourseService: VideoCourseService, private dialog: MatDialog) {
+  constructor(
+    private videoCourseService: VideoCourseService,
+    private dialog: MatDialog,
+    public snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.courseListSubscription = this.videoCourseService.getCourseListChange()
       .subscribe((courseList) => {
         this.courseList = courseList;
+      });
+    this.serverErrorSubscription = this.videoCourseService.getServerConnectionError()
+      .subscribe(() => {
+        this.snackBar.open('Connection to server failed. Please try again later.', '', {
+          duration: 3000
+        });
       });
     this.refreshCourseList();
   }

@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       name: this.loginForm.value.login,
       password: this.loginForm.value.password
     })
-      .subscribe((response) => {
+      .subscribe(() => {
           this.errorMessage = '';
           this.router.navigate(['/courses']);
         },

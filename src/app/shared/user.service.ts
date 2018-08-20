@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { pipe, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  readonly BASE_URL = 'http://localhost:3004';
+  private readonly BASE_URL = 'http://localhost:3004';
   public authChange = new Subject<boolean>();
   private user: User;
 
@@ -25,16 +25,16 @@ export class UserService {
   }
 
   public login(user: AuthData) {
-    return this.http.post<any>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
+    return this.http.post<{ token: string }>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
       .pipe(
-      tap((response) => {
-        this.user = {
-          name: user.name,
-          token: response.token
-        };
-        this.authChange.next(true);
-      })
-    );
+        tap((response) => {
+          this.user = {
+            name: user.name,
+            token: response.token
+          };
+          this.authChange.next(true);
+        })
+      );
   }
 
   public logout(): void {

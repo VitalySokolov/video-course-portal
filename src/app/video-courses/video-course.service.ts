@@ -11,6 +11,7 @@ export class VideoCourseService {
   private readonly BASE_URL = 'http://localhost:3004/courses';
   private courseList: VideoCourseItem[] = [];
   private courseListChange = new Subject<VideoCourseItem[]>();
+  private serverConnectionError = new Subject<void>();
 
   constructor(private httpClient: HttpClient) {
   }
@@ -19,8 +20,12 @@ export class VideoCourseService {
     return this.courseListChange;
   }
 
+  public getServerConnectionError(): Subject<void> {
+    return this.serverConnectionError;
+  }
+
   public getVideoCourses(): void {
-    if (this.courseList.length > 0) {
+    if (this.courseList.length) {
       this.courseListChange.next(this.courseList);
     } else {
       this.fetchVideoCourses();
@@ -30,9 +35,7 @@ export class VideoCourseService {
   private fetchVideoCourses() {
     this.httpClient.get<CourseItem[]>(`${this.BASE_URL}`)
       .subscribe(response => {
-        this.courseList = response.map(course => {
-          return this.convertToVideoCourseItem(course);
-        });
+        this.courseList = response.map(this.convertToVideoCourseItem);
         this.courseListChange.next(this.courseList);
       });
   }
@@ -59,8 +62,13 @@ export class VideoCourseService {
 
   public removeCourse(id: number): void {
     this.httpClient.delete(`${this.BASE_URL}/${id}`)
-      .subscribe();
-    this.courseList = this.courseList.filter((course) => course.id !== id);
+      .subscribe(() => {
+          this.courseList = this.courseList.filter((course) => course.id !== id);
+          this.courseListChange.next(this.courseList);
+        },
+        () => {
+          this.serverConnectionError.next();
+        });
   }
 
   public updateCourse(videoCourse: VideoCourseItem): void {
@@ -79,11 +87,8 @@ export class VideoCourseService {
           });
           this.courseListChange.next(this.courseList);
         },
-        (error) => {
-          this.courseList = this.courseList.map((course) => {
-            return course.id === videoCourse.id ? videoCourse : course;
-          });
-          this.courseListChange.next(this.courseList);
+        () => {
+          this.serverConnectionError.next();
         });
   }
 
@@ -92,7 +97,7 @@ export class VideoCourseService {
       id: course.id,
       title: course.name,
       description: course.description,
-      authors: course.authors.slice(),
+      authors: course.authors,
       duration: course.length,
       date: new Date(course.date),
       isTopRated: course.isTopRated
