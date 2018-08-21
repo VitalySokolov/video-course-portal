@@ -7,6 +7,8 @@ import { CoreModule } from '@core/core.module';
 import { VideoCoursesModule } from '@video-courses/video-courses.module';
 import { AuthModule } from '@auth/auth.module';
 import { AppRoutingModule } from './app.routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@shared/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { AppRoutingModule } from './app.routing.module';
     CoreModule,
     AppRoutingModule,
     VideoCoursesModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

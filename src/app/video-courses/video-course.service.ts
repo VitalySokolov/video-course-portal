@@ -1,93 +1,59 @@
 import { Injectable } from '@angular/core';
 import { VideoCourseItem } from './video-course-item.model';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { CourseItem } from './course-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoCourseService {
-  private courseList: VideoCourseItem[] = [
-    {
-      id: 1,
-      title: 'Angular Course',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
-      ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
-      ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
-      ' Praesent vitae laoreet justo, a scelerisque arcu. Fusce nec lorem mi. Donec non tortor erat.' +
-      ' Aliquam sit amet augue sed velit scelerisque sollicitudin. Proin gravida fermentum metus, nec laoreet' +
-      ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
-      ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
-      ' ultricies gravida.',
-      date: new Date((new Date()).getTime() - 500000000),
-      duration: 88
-    },
-    {
-      id: 2,
-      title: 'React.js for beginners',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
-      ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
-      ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
-      ' Praesent vitae laoreet justo, a scelerisque arcu. Fusce nec lorem mi. Donec non tortor erat.' +
-      ' Aliquam sit amet augue sed velit scelerisque sollicitudin. Proin gravida fermentum metus, nec laoreet' +
-      ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
-      ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
-      ' ultricies gravida.',
-      date: new Date((new Date()).getTime() + 500000000),
-      duration: 27
-    },
-    {
-      id: 3,
-      title: 'Angular Advance Course',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
-      ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
-      ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
-      ' Praesent vitae laoreet justo, a scelerisque arcu. Fusce nec lorem mi. Donec non tortor erat.' +
-      ' Aliquam sit amet augue sed velit scelerisque sollicitudin. Proin gravida fermentum metus, nec laoreet' +
-      ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
-      ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
-      ' ultricies gravida.',
-      date: new Date((new Date()).getTime()),
-      duration: 70
-    },
-    {
-      id: 4,
-      title: 'Angular, React and Vue.js',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
-      ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
-      ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
-      ' Praesent vitae laoreet justo, a scelerisque arcu. Fusce nec lorem mi. Donec non tortor erat.' +
-      ' Aliquam sit amet augue sed velit scelerisque sollicitudin. Proin gravida fermentum metus, nec laoreet' +
-      ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
-      ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
-      ' ultricies gravida.',
-      date: new Date((new Date()).getTime() - 5000000000),
-      duration: 46
-    },
-    {
-      id: 5,
-      title: 'Mean stack',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mauris est,' +
-      ' convallis sed lobortis non, aliquam ac diam. Duis quis orci eros. Donec vitae nisl vulputate,' +
-      ' finibus risus ultricies, sollicitudin tortor. Suspendisse sollicitudin sed tellus id malesuada.' +
-      ' Praesent vitae laoreet justo, a scelerisque arcu. Fusce nec lorem mi. Donec non tortor erat.' +
-      ' Aliquam sit amet augue sed velit scelerisque sollicitudin. Proin gravida fermentum metus, nec laoreet' +
-      ' metus laoreet ut. Maecenas vitae dictum nulla. Nam interdum lorem quis ultrices rutrum. Nunc fermentum' +
-      ' sodales nisi, sed ultricies augue dignissim quis. Vestibulum id elit orci. Sed rhoncus mauris sed' +
-      ' ultricies gravida.',
-      date: new Date((new Date()).getTime() - 1000000000),
-      duration: 30
-    },
-  ];
+  private readonly BASE_URL = 'http://localhost:3004/courses';
+  private courseList: VideoCourseItem[] = [];
+  private courseListChange = new Subject<VideoCourseItem[]>();
+  private serverConnectionError = new Subject<void>();
 
-  public getVideoCourses(): VideoCourseItem[] {
-    return this.courseList;
+  constructor(private httpClient: HttpClient) {
   }
 
-  public addCourse(course: VideoCourseItem): VideoCourseItem {
-    const list = this.courseList;
-    course.id = list.length ? list[list.length - 1].id + 1 : 1;
-    this.courseList = [...list, course];
+  public getCourseListChange(): Subject<VideoCourseItem[]> {
+    return this.courseListChange;
+  }
 
-    return course;
+  public getServerConnectionError(): Subject<void> {
+    return this.serverConnectionError;
+  }
+
+  public getVideoCourses(): void {
+    if (this.courseList.length) {
+      this.courseListChange.next(this.courseList);
+    } else {
+      this.fetchVideoCourses();
+    }
+  }
+
+  private fetchVideoCourses() {
+    this.httpClient.get<CourseItem[]>(`${this.BASE_URL}`)
+      .subscribe(response => {
+        this.courseList = response.map(this.convertToVideoCourseItem);
+        this.courseListChange.next(this.courseList);
+      });
+  }
+
+  public addCourse(course: VideoCourseItem): void {
+    const courseForUpdate = {
+      ...course,
+      name: course.title,
+      length: course.duration,
+      date: course.date.toDateString()
+    };
+
+    this.httpClient.post<CourseItem>(`${this.BASE_URL}`, courseForUpdate)
+      .subscribe(updatedCourse => {
+        course.id = updatedCourse.id;
+        this.courseList = [...this.courseList, course];
+        this.courseListChange.next(this.courseList);
+      });
   }
 
   public getCourse(id: number): VideoCourseItem | undefined {
@@ -95,12 +61,46 @@ export class VideoCourseService {
   }
 
   public removeCourse(id: number): void {
-    this.courseList = this.courseList.filter((course) => course.id !== id);
+    this.httpClient.delete(`${this.BASE_URL}/${id}`)
+      .subscribe(() => {
+          this.courseList = this.courseList.filter((course) => course.id !== id);
+          this.courseListChange.next(this.courseList);
+        },
+        () => {
+          this.serverConnectionError.next();
+        });
   }
 
-  public updateCourse(updatedCourse: VideoCourseItem): void {
-    this.courseList = this.courseList.map((course) => {
-      return course.id === updatedCourse.id ? updatedCourse : course;
-    });
+  public updateCourse(videoCourse: VideoCourseItem): void {
+    const courseForUpdate = {
+      ...videoCourse,
+      name: videoCourse.title,
+      length: videoCourse.duration,
+      date: videoCourse.date.toDateString()
+    };
+    this.httpClient.put<CourseItem>(`${this.BASE_URL}/${courseForUpdate.id}`, courseForUpdate)
+      .subscribe((updatedCourseItem) => {
+          const updatedCourse = this.convertToVideoCourseItem(updatedCourseItem);
+
+          this.courseList = this.courseList.map((course) => {
+            return course.id === updatedCourse.id ? updatedCourse : course;
+          });
+          this.courseListChange.next(this.courseList);
+        },
+        () => {
+          this.serverConnectionError.next();
+        });
+  }
+
+  private convertToVideoCourseItem(course: CourseItem): VideoCourseItem {
+    return {
+      id: course.id,
+      title: course.name,
+      description: course.description,
+      authors: course.authors,
+      duration: course.length,
+      date: new Date(course.date),
+      isTopRated: course.isTopRated
+    };
   }
 }

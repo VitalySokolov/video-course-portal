@@ -1,11 +1,11 @@
 import { AuthorItem } from './author-item.model';
 
-export interface VideoCourseItem {
+export interface CourseItem {
   id: number;
-  title: string;
+  name: string;
   description: string;
-  date: Date;
-  duration: number;
+  date: string;
+  length: number;
   authors: AuthorItem[];
   isTopRated: boolean;
 }

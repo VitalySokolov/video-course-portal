@@ -28,7 +28,9 @@ class TestHostComponent {
     title: this.courseTitle,
     description: this.courseDescription,
     date: new Date((new Date()).getTime() - 100000000),
-    duration: 123
+    duration: 123,
+    authors: [],
+    isTopRated: true
   };
   deletedId: number;
 

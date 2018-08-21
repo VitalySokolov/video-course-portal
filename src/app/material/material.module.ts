@@ -9,6 +9,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatButtonModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 @NgModule({
@@ -22,6 +23,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -32,6 +34,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
   declarations: []
 })
