@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app.routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeaderComponent,
     BreadcrumbsComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoaderComponent
   ],
   exports: [
     HeaderComponent,
