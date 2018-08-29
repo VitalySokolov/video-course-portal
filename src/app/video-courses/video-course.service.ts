@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { VideoCourseItem } from './video-course-item.model';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CourseItem } from './course-item.model';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,10 @@ export class VideoCourseService {
   private courseList: VideoCourseItem[] = [];
   private courseListChange = new Subject<VideoCourseItem[]>();
   private serverConnectionError = new Subject<void>();
+  private searchText = new Subject<string>();
 
   constructor(private httpClient: HttpClient) {
+    this.initSearchCourses();
   }
 
   public getCourseListChange(): Subject<VideoCourseItem[]> {
@@ -28,16 +31,11 @@ export class VideoCourseService {
     if (this.courseList.length) {
       this.courseListChange.next(this.courseList);
     } else {
-      this.fetchVideoCourses();
-    }
-  }
-
-  private fetchVideoCourses() {
-    this.httpClient.get<CourseItem[]>(`${this.BASE_URL}`)
-      .subscribe(response => {
-        this.courseList = response.map(this.convertToVideoCourseItem);
+      this.fetchVideoCourses('').subscribe((courseList) => {
+        this.courseList = courseList;
         this.courseListChange.next(this.courseList);
       });
+    }
   }
 
   public addCourse(course: VideoCourseItem): void {
@@ -58,6 +56,10 @@ export class VideoCourseService {
 
   public getCourse(id: number): VideoCourseItem | undefined {
     return this.courseList.find((course) => course.id === id);
+  }
+
+  public searchCourses(searchString: string) {
+    this.searchText.next(searchString);
   }
 
   public removeCourse(id: number): void {
@@ -90,6 +92,24 @@ export class VideoCourseService {
         () => {
           this.serverConnectionError.next();
         });
+  }
+
+  private initSearchCourses(): void {
+    this.searchText.pipe(
+      filter((text) => text.length > 3),
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((text) => this.fetchVideoCourses(text))
+    ).subscribe((courseList) => {
+      this.courseList = courseList;
+      this.courseListChange.next(this.courseList);
+    });
+  }
+
+  private fetchVideoCourses(textFragment: string): Observable<VideoCourseItem[]> {
+    return this.httpClient.get<CourseItem[]>(`${this.BASE_URL}?textFragment=${textFragment}`).pipe(
+      map(response => response.map(this.convertToVideoCourseItem))
+    );
   }
 
   private convertToVideoCourseItem(course: CourseItem): VideoCourseItem {
