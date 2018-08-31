@@ -13,11 +13,10 @@ import { AuthData } from './auth-data.model';
 })
 export class UserService {
   private readonly BASE_URL = 'http://localhost:3004';
-  public authChange = new Subject<boolean>();
+  public authChange = new Subject<User>();
   private user: User;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.authChange = new Subject<boolean>();
   }
 
   public getUserInfo(): User {
@@ -32,14 +31,14 @@ export class UserService {
             name: user.name,
             token: response.token
           };
-          this.authChange.next(true);
+          this.authChange.next(this.user);
         })
       );
   }
 
   public logout(): void {
     this.user = null;
-    this.authChange.next(false);
+    this.authChange.next(null);
     this.router.navigate(['/login']);
   }
 

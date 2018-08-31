@@ -62,8 +62,4 @@ export class CourseListComponent implements OnInit, OnDestroy {
   loadMoreCourses() {
     console.log('LoadMore button pressed');
   }
-
-  onSearchCourseClick(search: string) {
-    this.searchString = search;
-  }
 }

@@ -8,13 +8,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app.routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoaderComponent } from './loader/loader.component';
+import { MaterialModule } from '@material/material.module';
 
 @NgModule({
   imports: [
     AppRoutingModule,
     CommonModule,
     FlexLayoutModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MaterialModule
   ],
   declarations: [
     HeaderComponent,
@@ -23,11 +25,15 @@ import { LoaderComponent } from './loader/loader.component';
     PageNotFoundComponent,
     LoaderComponent
   ],
+  entryComponents: [
+    LoaderComponent
+  ],
   exports: [
     HeaderComponent,
     BreadcrumbsComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoaderComponent
   ]
 })
 export class CoreModule {
