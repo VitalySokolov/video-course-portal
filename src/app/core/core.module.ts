@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
-import { MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app.routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -15,7 +14,6 @@ import { MaterialModule } from '@material/material.module';
     AppRoutingModule,
     CommonModule,
     FlexLayoutModule,
-    MatToolbarModule,
     MaterialModule
   ],
   declarations: [
