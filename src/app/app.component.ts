@@ -11,12 +11,14 @@ import { LoaderComponent } from '@core/loader/loader.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public userService: UserService, private loaderService: LoaderService, private dialog: MatDialog) {
+  constructor(public userService: UserService,
+              private loaderService: LoaderService,
+              private dialog: MatDialog) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loaderService.getLoaderState().subscribe((state) => {
-      if (state.loading) {
+      if (state) {
         this.openLoadingDialog();
       } else {
         this.closeLoadingDialog();

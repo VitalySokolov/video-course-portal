@@ -12,8 +12,10 @@ export class SearchCourseComponent {
   constructor(private courseService: VideoCourseService, private router: Router) {
   }
 
-  search(searchString: string) {
-    this.courseService.searchCourses(searchString);
+  search(searchString: string | undefined) {
+    const searchStr = searchString || '';
+
+    this.courseService.searchCourses(searchStr);
   }
 
   onAddCourse() {

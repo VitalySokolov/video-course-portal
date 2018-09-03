@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-  constructor(public loaderService: LoaderService) {
+  constructor(private loaderService: LoaderService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

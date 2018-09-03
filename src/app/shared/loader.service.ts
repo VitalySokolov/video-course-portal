@@ -1,5 +1,4 @@
 import { Subject } from 'rxjs';
-import { LoaderState } from '../core/loader-state.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,17 +6,17 @@ import { Injectable } from '@angular/core';
 })
 export class LoaderService {
 
-  private loaderState = new Subject<LoaderState>();
+  private loaderState = new Subject<boolean>();
 
   public getLoaderState() {
     return this.loaderState;
   }
 
   public startLoading() {
-    this.loaderState.next({loading: true});
+    this.loaderState.next(true);
   }
 
   public finishLoading() {
-    this.loaderState.next({loading: false});
+    this.loaderState.next(false);
   }
 }
