@@ -1,5 +1,4 @@
-<app-search-course
-  (searchCourse)="onSearchCourseClick($event)"></app-search-course>
+<app-search-course></app-search-course>
 <app-course-item
   *ngFor="let course of courseList | filterByTitle: searchString"
   [courseId]="course.id"

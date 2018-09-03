@@ -10,6 +10,7 @@ import {
   MatNativeDateModule,
   MatButtonModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 @NgModule({
@@ -24,6 +25,7 @@ import {
     MatNativeDateModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -35,6 +37,7 @@ import {
     MatNativeDateModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   declarations: []
 })
