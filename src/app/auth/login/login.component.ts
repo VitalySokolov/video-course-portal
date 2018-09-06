@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         validators: [Validators.required]
       })
     });
-    }
+  }
 
   onSubmit() {
     this.userService.login({
@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/courses']);
         },
         (error) => {
+          this.loginForm.patchValue({
+            password: ''
+          });
           this.errorMessage = error.error;
         });
   }
