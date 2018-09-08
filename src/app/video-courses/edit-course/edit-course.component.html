@@ -15,8 +15,8 @@
         name="title"
         required
         formControlName="title">
-      <mat-hint>Please enter course title.</mat-hint>
-      <mat-error>Field must not be empty.</mat-error>
+      <mat-error *ngIf="courseForm.get('title').hasError('required')" align="end">Field must not be empty.</mat-error>
+      <mat-error *ngIf="courseForm.get('title').hasError('maxlength')" align="end">Maximum 50 chars.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <textarea
@@ -26,7 +26,8 @@
         name="description"
         required>
       </textarea>
-      <mat-error>Field must not be empty.</mat-error>
+      <mat-error *ngIf="courseForm.get('description').hasError('required')" align="end">Field must not be empty.</mat-error>
+      <mat-error *ngIf="courseForm.get('description').hasError('maxlength')" align="end">Maximum 500 chars.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -38,7 +39,7 @@
         required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error>Please choose the date.</mat-error>
+      <mat-error align="end">Please choose the date.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
@@ -48,8 +49,13 @@
         placeholder="Course Duration"
         name="duration"
         required>
-      <mat-error>Field must not be empty.</mat-error>
+      <mat-error align="end">Field must not be empty.</mat-error>
     </mat-form-field>
+    <mat-checkbox
+      formControlName="isTopRated"
+      color="primary">
+      Top Rated
+    </mat-checkbox>
     <div fxLayout fxLayoutGap="2em">
       <button type="submit" mat-raised-button [disabled]="courseForm.invalid">Submit</button>
       <button type="button" mat-raised-button (click)="onCancel()">Cancel</button>

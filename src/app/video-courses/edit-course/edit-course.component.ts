@@ -25,7 +25,8 @@ export class EditCourseComponent implements OnInit {
       title: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
       description: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
       date: new FormControl(null, Validators.required),
-      duration: new FormControl(null, Validators.required)
+      duration: new FormControl(null, Validators.required),
+      isTopRated: new FormControl(null)
     });
 
     this.route.params.subscribe((data) => {
@@ -35,7 +36,8 @@ export class EditCourseComponent implements OnInit {
           title: this.course.title,
           description: this.course.description,
           date: this.course.date,
-          duration: this.course.duration
+          duration: this.course.duration,
+          isTopRated: this.course.isTopRated
         });
       } else {
         this.course = {id: 0, title: '', description: '', date: null, duration: 0, authors: [], isTopRated: false};
