@@ -46,9 +46,7 @@ export class EditCourseComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.courseForm.value);
     this.course = {...this.course, ...this.courseForm.value};
-    console.log(this.course);
     if (this.course.id === 0) {
       this.courseService.addCourse(this.course);
     } else {
