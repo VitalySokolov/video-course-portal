@@ -11,6 +11,7 @@ import {
   MatButtonModule,
   MatSnackBarModule,
   MatProgressSpinnerModule,
+  MatCheckboxModule,
 } from '@angular/material';
 
 @NgModule({
@@ -26,6 +27,7 @@ import {
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -38,6 +40,7 @@ import {
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
   ],
   declarations: []
 })
