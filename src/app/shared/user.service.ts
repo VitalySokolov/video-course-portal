@@ -24,16 +24,7 @@ export class UserService {
   }
 
   public login(user: AuthData) {
-    return this.http.post<{ token: string }>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password})
-      .pipe(
-        tap((response) => {
-          this.user = {
-            name: user.name,
-            token: response.token
-          };
-          this.authChange.next(this.user);
-        })
-      );
+    return this.http.post<{ token: string }>(`${this.BASE_URL}/auth/login`, {login: user.name, password: user.password});
   }
 
   public logout(): void {

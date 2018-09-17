@@ -4,7 +4,8 @@ import { User } from '@shared/user.model';
 export enum AuthActionTypes {
   Login = '[Auth] Login',
   LoginSuccess = '[Auth] Login Success',
-  LoginFail = '[Auth] Login Fail'
+  LoginFail = '[Auth] Login Fail',
+  Logout = '[Auth] Logout'
 }
 
 export class Login {
@@ -28,6 +29,11 @@ export class LoginFail {
   }
 }
 
+export class Logout {
+  readonly type = AuthActionTypes.Logout;
+}
+
 export type AuthActions = Login
   | LoginSuccess
-  | LoginFail;
+  | LoginFail
+  | Logout;

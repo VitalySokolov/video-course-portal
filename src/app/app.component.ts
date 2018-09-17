@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loaderService.getLoaderState().subscribe((state) => {
-      if (state) {
-        this.openLoadingDialog();
-      } else {
-        this.closeLoadingDialog();
-      }
-    });
+    // this.loaderService.getLoaderState().subscribe((state) => {
+    //   if (state) {
+    //     this.openLoadingDialog();
+    //   } else {
+    //     this.closeLoadingDialog();
+    //   }
+    // });
   }
 
   openLoadingDialog() {
