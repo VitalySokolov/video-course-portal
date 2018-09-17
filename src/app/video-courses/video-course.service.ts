@@ -106,7 +106,7 @@ export class VideoCourseService {
     });
   }
 
-  private fetchVideoCourses(textFragment: string): Observable<VideoCourseItem[]> {
+  public fetchVideoCourses(textFragment: string): Observable<VideoCourseItem[]> {
     return this.httpClient.get<CourseItem[]>(`${this.BASE_URL}?textFragment=${textFragment}`).pipe(
       map(response => response.map(this.convertToVideoCourseItem))
     );

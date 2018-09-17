@@ -44,39 +44,9 @@ describe('UserService', () => {
     service.login(validUser)
       .subscribe(data => {
         expect(data).toEqual(authResponse);
-        expect(service.isAuthorized()).toBe(true);
       });
 
     const req = httpTestingController.expectOne(testLoginUrl);
     req.flush(authResponse);
-  }));
-
-  it('should perform logout', inject([UserService], (service: UserService) => {
-    service.login(validUser)
-      .subscribe(data => {
-        expect(service.isAuthorized()).toBe(true);
-      });
-
-    const req = httpTestingController.expectOne(testLoginUrl);
-    req.flush(authResponse);
-
-    service.logout();
-    expect(service.isAuthorized()).toBe(false);
-  }));
-
-  it('should not be authorized before login', inject([UserService], (service: UserService) => {
-    expect(service.isAuthorized()).toBe(false);
-  }));
-
-  it('should return current user', inject([UserService], (service: UserService) => {
-    service.login(validUser)
-      .subscribe(data => {
-        expect(service.isAuthorized()).toBe(true);
-      });
-
-    const req = httpTestingController.expectOne(testLoginUrl);
-    req.flush(authResponse);
-
-    expect(service.getUserInfo().name).toBe(userName);
   }));
 });
